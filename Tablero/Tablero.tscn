@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tablero/Tablero.gd" type="Script" id=1]
+[ext_resource path="res://Ficha/Ficha.tscn" type="PackedScene" id=2]
+
+[node name="Tablero" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Ficha" parent="." instance=ExtResource( 2 )]
+numero = 1
+
+[node name="Ficha2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 63, 0 )
+numero = 2
+
+[node name="Ficha3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 127, 0 )
+numero = 3
+
+[node name="Ficha4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 191, 0 )
+numero = 4
+
+[node name="Ficha5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 64 )
+numero = 5
+
+[node name="Ficha6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 64, 64 )
+numero = 6
+
+[node name="Ficha7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 128, 64 )
+numero = 7
+
+[node name="Ficha8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 191, 64 )
+numero = 8
+
+[node name="Ficha9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 128 )
+numero = 9
+
+[node name="Ficha10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 64, 128 )
+numero = 10
+
+[node name="Ficha11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 128, 128 )
+numero = 11
+
+[node name="Ficha12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 192, 128 )
+numero = 12
+
+[node name="Ficha13" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 192 )
+numero = 13
+
+[node name="Ficha14" parent="." instance=ExtResource( 2 )]
+position = Vector2( 64, 192 )
+numero = 14
+
+[node name="Ficha15" parent="." instance=ExtResource( 2 )]
+position = Vector2( 128, 192 )
+numero = 15
+
+[node name="Ficha16" parent="." instance=ExtResource( 2 )]
+position = Vector2( 191, 192 )
+numero = 0
+
