@@ -36,7 +36,7 @@ func guardar(menor_tiempo: float) -> void:
     archivo.close()
 
 #Carga el archivo que guarda el mejor tiempo
-func cargar():
+func cargar() -> void:
 	var archivo = File.new()
 	if not archivo.file_exists("user://highscore.sav"):#Si el archivo no existe asigno un valor por defecto
 		mejor_tiempo = 999
@@ -48,3 +48,6 @@ func cargar():
 	else:
 		mejor_tiempo = 999
 	archivo.close()
+
+func _on_UI_invertir_control(invertir: bool) -> void:
+	$Tablero.invertir_control(invertir)

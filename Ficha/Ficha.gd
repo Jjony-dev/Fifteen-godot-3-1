@@ -2,10 +2,10 @@ extends Node2D
 
 export var numero: int#Numero de ficha
 var _pos: Vector2#Posicion dentro del tablero
-const ARRIBA = Vector2(0, -1)
-const ABAJO = Vector2(0, 1)
-const DERECHA = Vector2(1, 0)
-const IZQUIERDA = Vector2(-1, 0)
+const ARRIBA: Vector2 = Vector2(0, -1)
+const ABAJO: Vector2 = Vector2(0, 1)
+const DERECHA: Vector2 = Vector2(1, 0)
+const IZQUIERDA:Vector2 = Vector2(-1, 0)
 const DIRECCION = [ARRIBA, ABAJO, DERECHA, IZQUIERDA]
 
 func _ready():

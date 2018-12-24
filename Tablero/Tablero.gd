@@ -6,6 +6,7 @@ var tamanio: Vector2 = Vector2(4, 4)
 var posiciones = []
 var vacio: Node2D
 var gano = false
+var control: int = -1
 
 func _ready():
 	randomize()
@@ -26,7 +27,6 @@ func iniciar():
 #Desordeno las fichas realizando movimientos aleatorios
 func mezclar() -> void:
 	var movimientos = 400 + randi() % 100 * tamanio.x * tamanio.y #Para un tablero de 4x4 entre 400 y 2000 movimientos
-	var fichas = get_children()#Obtengo las fichas del tablero
 	for m in movimientos:
 		var vecino: Node2D
 		var d = randi() % 4#Direccion aleatoria del movimiento
@@ -37,7 +37,7 @@ func mezclar() -> void:
 #Devuelve la ficha vecina en la direccion indicada o null si no tiene
 func vecino(direccion: Vector2) -> Node2D:
 	for f in get_children():
-				if vacio.get_pos().x - f.get_pos().x == -direccion.x && vacio.get_pos().y - f.get_pos().y == -direccion.y:
+				if vacio.get_pos().x - f.get_pos().x == control * direccion.x && vacio.get_pos().y - f.get_pos().y == control * direccion.y:
 					return f
 	return null
 	
@@ -81,6 +81,12 @@ func ha_ganado() -> bool:
 		if int(f.get_pos().x) != (f.numero - 1) % int(tamanio.x) || int(f.get_pos().y) != (f.numero - 1) / int(tamanio.x):
 			return false
 	return true
+	
+func invertir_control(var invertir: bool) -> void:
+	if invertir:
+		control = 1
+	else:
+		control = -1
 
 #NO FUNCIONA:Puede provocar permutacion impar
 #Asigna las posiciones al azar
