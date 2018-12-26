@@ -10,6 +10,6 @@ func _ready():
 func _on_Reiniciar_button_up():
 	emit_signal("reiniciar")
 
-#Responde a la señal toggled del boton Reiniciar
+#Responde a la señal toggled del boton Invertir
 func _on_Invertir_toggled(button_pressed):
 	emit_signal("invertir_control", button_pressed)
