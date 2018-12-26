@@ -29,7 +29,7 @@ func _on_Tablero_ganar() -> void:
 
 #Guarda en un archivo el valor pasado como "mejor_tiempo" con estructura json
 func guardar(menor_tiempo: float) -> void:
-    var archivo = File.new()
+    var archivo: File = File.new()
     archivo.open("user://highscore.sav", File.WRITE)
     var datos: Dictionary = {"mejor_tiempo": menor_tiempo}
     archivo.store_line(to_json(datos))
@@ -37,17 +37,18 @@ func guardar(menor_tiempo: float) -> void:
 
 #Carga el archivo que guarda el mejor tiempo
 func cargar() -> void:
-	var archivo = File.new()
+	var archivo: File = File.new()
 	if not archivo.file_exists("user://highscore.sav"):#Si el archivo no existe asigno un valor por defecto
 		mejor_tiempo = 999
 		return
 	archivo.open("user://highscore.sav", File.READ)
-	var dato = parse_json(archivo.get_line())
+	var dato: Dictionary = parse_json(archivo.get_line())
 	if dato && float(dato["mejor_tiempo"]):#Si el dato no es nulo y se puede convertir en float
 		mejor_tiempo = dato["mejor_tiempo"]
 	else:
 		mejor_tiempo = 999
 	archivo.close()
 
+#Funcion que responde a la señal invertir_control que emite UI
 func _on_UI_invertir_control(invertir: bool) -> void:
 	$Tablero.invertir_control(invertir)

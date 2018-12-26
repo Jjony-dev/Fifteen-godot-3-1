@@ -2,9 +2,10 @@ extends Node2D
 
 signal ganar
 
+const Ficha = preload("res://Ficha/Ficha.gd")
 var tamanio: Vector2 = Vector2(4, 4)
 var posiciones = []
-var vacio: Node2D
+var vacio: Ficha
 var gano = false
 var control: int = -1
 
@@ -14,7 +15,7 @@ func _ready():
 	for j in tamanio.y:
 		for i in tamanio.x:
 			posiciones.append(Vector2( i, j))
-	vacio = get_children()[get_child_count() - 1]
+	vacio = get_children()[get_child_count() - 1] as Ficha
 	iniciar()
 
 func iniciar():
@@ -28,28 +29,28 @@ func iniciar():
 func mezclar() -> void:
 	var movimientos = 400 + randi() % 100 * tamanio.x * tamanio.y #Para un tablero de 4x4 entre 400 y 2000 movimientos
 	for m in movimientos:
-		var vecino: Node2D
+		var vecino: Ficha
 		var d = randi() % 4#Direccion aleatoria del movimiento
 		vecino = vecino(vacio.DIRECCION[d])
 		if vecino:
 			permutar(vacio, vecino)
 
 #Devuelve la ficha vecina en la direccion indicada o null si no tiene
-func vecino(direccion: Vector2) -> Node2D:
+func vecino(direccion: Vector2) -> Ficha:
 	for f in get_children():
-				if vacio.get_pos().x - f.get_pos().x == control * direccion.x && vacio.get_pos().y - f.get_pos().y == control * direccion.y:
+				if vacio.pos.x - f.pos.x == control * direccion.x && vacio.pos.y - f.pos.y == control * direccion.y:
 					return f
 	return null
 	
 #Intercambia las posiciones dos fichas 
-func permutar(f1, f2) -> void:
-	var temp = f1.get_pos()
-	f1.set_pos(f2.get_pos())
-	f2.set_pos(temp)
+func permutar(f1: Ficha, f2: Ficha) -> void:
+	var temp: Vector2 = f1.pos
+	f1.pos = f2.pos
+	f2.pos = temp
 	
 func _input(event):
 	if  event is InputEventKey && !gano && event.is_pressed():#Responde a la entrada si no se gano
-		var vecino: Node2D
+		var vecino: Ficha
 		
 		if Input.is_action_just_pressed("ui_down"):
 			vecino = vecino(vacio.ABAJO)
@@ -78,20 +79,10 @@ func ha_ganado() -> bool:
 		if f.numero == vacio.numero:#Si llega a la ultima ficha
 			return true
 		#Compruebo si una ficha no esta en el lugar que le corresponde
-		if int(f.get_pos().x) != (f.numero - 1) % int(tamanio.x) || int(f.get_pos().y) != (f.numero - 1) / int(tamanio.x):
+		if int(f.pos.x) != (f.numero - 1) % int(tamanio.x) || int(f.pos.y) != (f.numero - 1) / int(tamanio.x):
 			return false
 	return true
 	
+#Cambia el sentido en que se mueven las fichas
 func invertir_control(var invertir: bool) -> void:
-	if invertir:
-		control = 1
-	else:
-		control = -1
-
-#NO FUNCIONA:Puede provocar permutacion impar
-#Asigna las posiciones al azar
-#func asignar_celda(f: Node2D):
-#	if posiciones.size() > 0 :
-#		var aleatorio = randi() % posiciones.size()
-#		f.set_pos(posiciones[aleatorio])
-#		posiciones.remove(aleatorio)
+	control = 1 if invertir	else -1

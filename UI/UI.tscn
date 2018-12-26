@@ -46,7 +46,7 @@ margin_bottom = -588.0
 text = "Mejor Tiempo:"
 valign = 1
 
-[node name="CheckButton" type="CheckButton" parent="."]
+[node name="Invertir" type="CheckButton" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -61,4 +61,4 @@ text = "Invertir Control"
 align = 1
 
 [connection signal="button_up" from="Reiniciar" to="." method="_on_Reiniciar_button_up"]
-[connection signal="toggled" from="CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="toggled" from="Invertir" to="." method="_on_Invertir_toggled"]
