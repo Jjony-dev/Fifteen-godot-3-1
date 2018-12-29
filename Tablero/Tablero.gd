@@ -19,10 +19,13 @@ func _ready():
 	iniciar()
 
 func iniciar():
+	var textura: int = randi() % vacio.texturas.size()
 	gano = false#Controla si el juego continua
 	var fichas = get_children()
 	for f in get_children().size():
+		fichas[f].set_textura(fichas[f].texturas[textura])
 		fichas[f].set_pos(posiciones[f])
+	vacio.visible = false
 	mezclar()
 
 #Desordeno las fichas realizando movimientos aleatorios
@@ -49,25 +52,50 @@ func permutar(f1: Ficha, f2: Ficha) -> void:
 	f2.pos = temp
 	
 func _input(event):
-	if  event is InputEventKey && !gano && event.is_pressed():#Responde a la entrada si no se gano
-		var vecino: Ficha
-		
-		if Input.is_action_just_pressed("ui_down"):
-			vecino = vecino(vacio.ABAJO)
-			if vecino:
-				permutar(vacio, vecino)
-		if Input.is_action_just_pressed("ui_up"):
-			vecino = vecino(vacio.ARRIBA)
-			if vecino:
-				permutar(vacio, vecino)
-		if Input.is_action_just_pressed("ui_right"):
-			vecino = vecino(vacio.DERECHA)
-			if vecino:
-				permutar(vacio, vecino)
-		if Input.is_action_just_pressed("ui_left"):
-			vecino = vecino(vacio.IZQUIERDA)
-			if vecino:
-				permutar(vacio, vecino)
+	if OS.get_name() == "Android" || OS.get_name() == "iOS":
+		if event as InputEventScreenTouch && !gano && event.is_pressed():
+			var vecino: Ficha
+			
+			if event.position.y > global_position.y && event.position.y < global_position.y + 256:
+				if event.position.y > vacio.global_position.y && event.position.x > vacio.global_position.x && event.position.x < vacio.global_position.x + 64:
+					vecino = vecino(vacio.ABAJO)
+					if vecino:
+						permutar(vacio, vecino)
+				if event.position.y < vacio.global_position.y && event.position.x > vacio.global_position.x && event.position.x < vacio.global_position.x + 64 :
+					vecino = vecino(vacio.ARRIBA)
+					if vecino:
+						permutar(vacio, vecino)
+				if event.position.x > vacio.global_position.x && event.position.y > vacio.global_position.y && event.position.y < vacio.global_position.y + 64:
+					vecino = vecino(vacio.DERECHA)
+					if vecino:
+						permutar(vacio, vecino)
+				if event.position.x < vacio.global_position.x && event.position.y > vacio.global_position.y && event.position.y < vacio.global_position.y + 64:
+					vecino = vecino(vacio.IZQUIERDA)
+					if vecino:
+						permutar(vacio, vecino)
+		if ha_ganado():#Compruba si el jugador gano
+			gano = true
+			emit_signal("ganar")#Emite la señal de que gano
+	else:
+		if  event is InputEventKey && !gano && event.is_pressed():#Responde a la entrada si no se gano
+			var vecino: Ficha
+			
+			if Input.is_action_just_pressed("ui_down"):
+				vecino = vecino(vacio.ABAJO)
+				if vecino:
+					permutar(vacio, vecino)
+			if Input.is_action_just_pressed("ui_up"):
+				vecino = vecino(vacio.ARRIBA)
+				if vecino:
+					permutar(vacio, vecino)
+			if Input.is_action_just_pressed("ui_right"):
+				vecino = vecino(vacio.DERECHA)
+				if vecino:
+					permutar(vacio, vecino)
+			if Input.is_action_just_pressed("ui_left"):
+				vecino = vecino(vacio.IZQUIERDA)
+				if vecino:
+					permutar(vacio, vecino)
 		if ha_ganado():#Compruba si el jugador gano
 			gano = true
 			emit_signal("ganar")#Emite la señal de que gano
@@ -77,6 +105,7 @@ func ha_ganado() -> bool:
 	var fichas = get_children()
 	for f in fichas:
 		if f.numero == vacio.numero:#Si llega a la ultima ficha
+			vacio.visible = true
 			return true
 		#Compruebo si una ficha no esta en el lugar que le corresponde
 		if int(f.pos.x) != (f.numero - 1) % int(tamanio.x) || int(f.pos.y) != (f.numero - 1) / int(tamanio.x):

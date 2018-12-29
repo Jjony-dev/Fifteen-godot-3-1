@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ficha.png-d8a06a53468bdefe5555c8585b36aab8.stex"
+path="res://.import/godotlogo.jpg-b3dc585c59ffbbb61ff4d482c63f7456.stex"
 
 [deps]
 
-source_file="res://Ficha/ficha.png"
-dest_files=[ "res://.import/ficha.png-d8a06a53468bdefe5555c8585b36aab8.stex" ]
+source_file="res://Ficha/Imagenes/godotlogo.jpg"
+dest_files=[ "res://.import/godotlogo.jpg-b3dc585c59ffbbb61ff4d482c63f7456.stex" ]
 
 [params]
 

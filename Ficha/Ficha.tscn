@@ -1,22 +1,23 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Ficha/Ficha.gd" type="Script" id=1]
-[ext_resource path="res://Ficha/ficha.png" type="Texture" id=2]
+[ext_resource path="res://Ficha/Imagenes/ficha.png" type="Texture" id=2]
 
 [node name="Ficha" type="Node2D"]
 script = ExtResource( 1 )
+numero = 0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 32, 32 )
 texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="Numero" type="Label" parent="."]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
-custom_constants/shadow_offset_x = 1
 text = "0"
 align = 1
 valign = 1

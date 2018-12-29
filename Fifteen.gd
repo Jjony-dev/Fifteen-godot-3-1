@@ -1,31 +1,35 @@
 extends Node
 
+const UI =  preload("res://UI/UI.gd")
+const Tablero =  preload("res://Tablero/Tablero.gd")
+onready var ui: UI = $UI
+onready var tablero: Tablero = $Fondo/Tablero
 var mejor_tiempo: float
 var tiempo: float
 
 func _ready():
 	cargar()
-	$UI/Mejor.text = "Mejor Tiempo: " + str(mejor_tiempo).substr(0, 4)
+	ui.label_mejor.text = "Mejor Tiempo: " + str(mejor_tiempo).substr(0, 4)
 	tiempo = 0
 
 func _process(delta):
-	if !$UI/Ganaste.visible:#Si el label Ganaste no es visible se esta jugando
+	if !ui.label_ganaste.visible:#Si el label Ganaste no es visible se esta jugando
 		tiempo += delta
-		$UI/Tiempo.text = str(tiempo).substr(0, 4)
+		ui.label_tiempo.text = str(tiempo).substr(0, 4)
 
 #Funcion que responde a la señal reiniciar que emite UI
 func _on_UI_reiniciar() -> void:
-	$UI/Ganaste.visible = false
+	ui.label_ganaste.visible = false
 	tiempo = 0
-	$Tablero.iniciar()
+	tablero.iniciar()
 
 #Funcion que responde a la señal ganar que emite Tablero
 func _on_Tablero_ganar() -> void:
-	$UI/Ganaste.visible = true#Hace visible el Label de Ganar
+	ui.label_ganaste.visible = true#Hace visible el Label de Ganar
 	if tiempo < mejor_tiempo:#Comprueba si se mejoro el tiempo
 		mejor_tiempo = tiempo
 		guardar(mejor_tiempo)
-		$UI/Mejor.text = "Mejor Tiempo: " + str(tiempo).substr(0, 4)
+		ui.label_mejor.text = "Mejor Tiempo: " + str(tiempo).substr(0, 4)
 
 #Guarda en un archivo el valor pasado como "mejor_tiempo" con estructura json
 func guardar(menor_tiempo: float) -> void:
@@ -51,4 +55,4 @@ func cargar() -> void:
 
 #Funcion que responde a la señal invertir_control que emite UI
 func _on_UI_invertir_control(invertir: bool) -> void:
-	$Tablero.invertir_control(invertir)
+	tablero.invertir_control(invertir)

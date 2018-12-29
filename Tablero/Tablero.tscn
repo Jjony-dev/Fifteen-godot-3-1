@@ -67,5 +67,5 @@ numero = 15
 
 [node name="Ficha16" parent="." instance=ExtResource( 2 )]
 position = Vector2( 191, 192 )
-numero = 0
+numero = 16
 

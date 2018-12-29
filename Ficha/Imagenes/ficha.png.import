@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilewall.png-3c02defcc3f585ed5ce2905bb5fbfed3.stex"
+path="res://.import/ficha.png-f0edc2d4610498a02096ebf88db7628f.stex"
 
 [deps]
 
-source_file="res://Ficha/tilewall.png"
-dest_files=[ "res://.import/tilewall.png-3c02defcc3f585ed5ce2905bb5fbfed3.stex" ]
+source_file="res://Ficha/Imagenes/ficha.png"
+dest_files=[ "res://.import/ficha.png-f0edc2d4610498a02096ebf88db7628f.stex" ]
 
 [params]
 
