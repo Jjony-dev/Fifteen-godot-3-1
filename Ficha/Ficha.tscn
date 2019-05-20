@@ -22,3 +22,4 @@ text = "0"
 align = 1
 valign = 1
 
+[node name="Tween" type="Tween" parent="."]

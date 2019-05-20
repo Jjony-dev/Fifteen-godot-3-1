@@ -24,7 +24,6 @@ color = Color( 0.368627, 0.368627, 0.368627, 0.945098 )
 position = Vector2( 32, 32 )
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-
 [connection signal="ganar" from="Fondo/Tablero" to="." method="_on_Tablero_ganar"]
 [connection signal="invertir_control" from="UI" to="." method="_on_UI_invertir_control"]
 [connection signal="reiniciar" from="UI" to="." method="_on_UI_reiniciar"]

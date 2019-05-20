@@ -24,9 +24,12 @@ func set_pos(valor: Vector2):#Asigno la posicion en el tablero
 	pos = valor
 	#Posiciono la ficha por el ancho del Sprite y la escala de la ficha
 	if $Sprite.region_enabled:
-		position = $Sprite.region_rect.size * scale * pos
+		$Tween.interpolate_property(self, "position", position, $Sprite.region_rect.size * scale * pos,
+				.25, Tween.TRANS_SINE, Tween.EASE_OUT)
 	else:
-		position = $Sprite.texture.get_size() * scale * pos
+		$Tween.interpolate_property(self, "position", position, $Sprite.texture.get_size() * scale * pos,
+				.25, Tween.TRANS_SINE, Tween.EASE_OUT)
+	$Tween.start()
 	
 func get_pos() -> Vector2:#Obtengo la posicion en el tablero
 	return pos
