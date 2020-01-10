@@ -33,11 +33,11 @@ func _on_Tablero_ganar() -> void:
 
 #Guarda en un archivo el valor pasado como "mejor_tiempo" con estructura json
 func guardar(menor_tiempo: float) -> void:
-    var archivo: File = File.new()
-    archivo.open("user://highscore.sav", File.WRITE)
-    var datos: Dictionary = {"mejor_tiempo": menor_tiempo}
-    archivo.store_line(to_json(datos))
-    archivo.close()
+	var archivo: File = File.new()
+	archivo.open("user://highscore.sav", File.WRITE)
+	var datos: Dictionary = {"mejor_tiempo": menor_tiempo}
+	archivo.store_line(to_json(datos))
+	archivo.close()
 
 #Carga el archivo que guarda el mejor tiempo
 func cargar() -> void:
